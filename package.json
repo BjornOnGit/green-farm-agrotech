@@ -1,0 +1,7 @@
+{
+  "name": "green-farm-agrotech",
+  "private": true,
+  "workspaces": [
+    "apps/*"
+  ]
+}
