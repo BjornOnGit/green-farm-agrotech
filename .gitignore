@@ -1,7 +1,7 @@
 node_modules
 .env
 .env.*
-.next
-dist
+.next/
+dist/
 architecture.md
 tasks.md
