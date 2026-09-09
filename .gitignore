@@ -5,3 +5,4 @@ node_modules
 dist/
 architecture.md
 tasks.md
+apps/api/src/generated
