@@ -1,0 +1,43 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Product {
+  id                String    @id @default(uuid())
+  name              String
+  category          String
+  unit              String
+  pricePerUnit      Decimal?
+  quantityAvailable Decimal
+  sourceLocation    String?
+  isActive          Boolean   @default(true)
+  updatedAt         DateTime  @updatedAt
+  inquiries         Inquiry[]
+}
+
+model Inquiry {
+  id                String        @id @default(uuid())
+  productId         String
+  buyerName         String
+  buyerCompany      String?
+  buyerEmail        String
+  buyerPhone        String?
+  quantityRequested Decimal
+  message           String?
+  status            InquiryStatus @default(NEW)
+  internalNotes     String?
+  createdAt         DateTime      @default(now())
+  product           Product       @relation(fields: [productId], references: [id])
+}
+
+enum InquiryStatus {
+  NEW
+  CONTACTED
+  QUOTED
+  CLOSED
+}
