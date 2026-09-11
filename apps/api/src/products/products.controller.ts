@@ -35,4 +35,10 @@ export class ProductsController {
   softDelete(@Param('id') id: string) {
     return this.productsService.softDelete(id);
   }
+
+  @UseGuards(ClerkAuthGuard)
+  @Get('admin/products')
+  findAll() {
+    return this.productsService.findAll();
+  }
 }

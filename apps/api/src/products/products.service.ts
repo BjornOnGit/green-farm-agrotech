@@ -11,6 +11,10 @@ export class ProductsService {
     return this.prisma.product.findMany({ where: { isActive: true } });
   }
 
+  findAll() {
+  return this.prisma.product.findMany();
+  }
+
   async findOne(id: string) {
     const product = await this.prisma.product.findUnique({ where: { id } });
     if (!product) {

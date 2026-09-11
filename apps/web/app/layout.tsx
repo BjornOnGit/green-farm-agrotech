@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
+import Link from "next/link";
+import { Leaf } from "lucide-react";
 import "./globals.css";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
@@ -16,10 +18,15 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <ClerkProvider>
       <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
         <body>
-          <header style={{ padding: "1rem 2rem", borderBottom: "1px solid #ddd" }}>
-            <strong>Green Farm Agrotech</strong>
+          <header className="border-b">
+            <div className="mx-auto flex max-w-6xl items-center gap-2 px-6 py-4">
+              <Leaf className="size-5 text-primary" />
+              <Link href="/" className="font-semibold">
+                Green Farm Agrotech
+              </Link>
+            </div>
           </header>
-          <main style={{ padding: "2rem" }}>{children}</main>
+          <main className="mx-auto max-w-6xl px-6 py-8">{children}</main>
         </body>
       </html>
     </ClerkProvider>

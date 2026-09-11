@@ -1,18 +1,27 @@
-import type { Product } from '../lib/types';
+import type { Product } from '@/lib/types';
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
+import { Package } from 'lucide-react';
 
 export function ProductCard({ product }: { product: Product }) {
   return (
-    <div style={{ border: '1px solid #ddd', borderRadius: 8, padding: '1rem' }}>
-      <h3 style={{ margin: 0 }}>{product.name}</h3>
-      <p style={{ margin: '0.25rem 0', color: '#666' }}>{product.category}</p>
-      <p style={{ margin: '0.25rem 0' }}>
-        {product.pricePerUnit
-          ? `₦${Number(product.pricePerUnit).toLocaleString()} / ${product.unit}`
-          : `Price on request / ${product.unit}`}
-      </p>
-      <p style={{ margin: '0.25rem 0', fontSize: '0.9rem', color: '#888' }}>
-        {Number(product.quantityAvailable).toLocaleString()} {product.unit} available
-      </p>
-    </div>
+    <Card className="transition-shadow hover:shadow-md">
+      <CardHeader>
+        <CardTitle className="flex items-center gap-2">
+          <Package className="size-4 text-muted-foreground" />
+          {product.name}
+        </CardTitle>
+        <CardDescription>{product.category}</CardDescription>
+      </CardHeader>
+      <CardContent className="space-y-1">
+        <p className="font-medium">
+          {product.pricePerUnit
+            ? `₦${Number(product.pricePerUnit).toLocaleString()} / ${product.unit}`
+            : `Price on request / ${product.unit}`}
+        </p>
+        <p className="text-sm text-muted-foreground">
+          {Number(product.quantityAvailable).toLocaleString()} {product.unit} available
+        </p>
+      </CardContent>
+    </Card>
   );
 }

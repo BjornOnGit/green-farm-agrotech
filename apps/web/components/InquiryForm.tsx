@@ -2,7 +2,11 @@
 
 import { useState, FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
-import { submitInquiry } from '../lib/api-client';
+import { submitInquiry } from '@/lib/api-client';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Label } from '@/components/ui/label';
+import { Button } from '@/components/ui/button';
 
 interface InquiryFormValues {
   buyerName: string;
@@ -51,15 +55,35 @@ export function InquiryForm({ productId }: { productId: string }) {
   }
 
   return (
-    <form onSubmit={handleSubmit} style={{ display: 'grid', gap: '0.75rem', maxWidth: 400 }}>
-      <label>Name*<input required value={values.buyerName} onChange={handleChange('buyerName')} /></label>
-      <label>Company<input value={values.buyerCompany} onChange={handleChange('buyerCompany')} /></label>
-      <label>Email*<input required type="email" value={values.buyerEmail} onChange={handleChange('buyerEmail')} /></label>
-      <label>Phone<input value={values.buyerPhone} onChange={handleChange('buyerPhone')} /></label>
-      <label>Quantity requested*<input required type="number" min="0" value={values.quantityRequested} onChange={handleChange('quantityRequested')} /></label>
-      <label>Message<textarea value={values.message} onChange={handleChange('message')} /></label>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      <button type="submit" disabled={submitting}>{submitting ? 'Submitting…' : 'Submit inquiry'}</button>
+    <form onSubmit={handleSubmit} className="grid max-w-md gap-4">
+      <div className="grid gap-1.5">
+        <Label htmlFor="buyerName">Name*</Label>
+        <Input id="buyerName" required value={values.buyerName} onChange={handleChange('buyerName')} />
+      </div>
+      <div className="grid gap-1.5">
+        <Label htmlFor="buyerCompany">Company</Label>
+        <Input id="buyerCompany" value={values.buyerCompany} onChange={handleChange('buyerCompany')} />
+      </div>
+      <div className="grid gap-1.5">
+        <Label htmlFor="buyerEmail">Email*</Label>
+        <Input id="buyerEmail" required type="email" value={values.buyerEmail} onChange={handleChange('buyerEmail')} />
+      </div>
+      <div className="grid gap-1.5">
+        <Label htmlFor="buyerPhone">Phone</Label>
+        <Input id="buyerPhone" value={values.buyerPhone} onChange={handleChange('buyerPhone')} />
+      </div>
+      <div className="grid gap-1.5">
+        <Label htmlFor="quantityRequested">Quantity requested*</Label>
+        <Input id="quantityRequested" required type="number" min="0" value={values.quantityRequested} onChange={handleChange('quantityRequested')} />
+      </div>
+      <div className="grid gap-1.5">
+        <Label htmlFor="message">Message</Label>
+        <Textarea id="message" value={values.message} onChange={handleChange('message')} />
+      </div>
+      {error && <p className="text-sm text-destructive">{error}</p>}
+      <Button type="submit" disabled={submitting}>
+        {submitting ? 'Submitting…' : 'Submit inquiry'}
+      </Button>
     </form>
   );
 }
