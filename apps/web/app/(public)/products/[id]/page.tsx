@@ -3,6 +3,8 @@ import { getProduct } from '@/lib/api-client';
 import { InquiryForm } from '@/components/InquiryForm';
 import { MapPin } from 'lucide-react';
 
+export const dynamic = 'force-dynamic';
+
 export default async function ProductDetailPage({
   params,
 }: {

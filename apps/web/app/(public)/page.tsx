@@ -2,6 +2,8 @@ import Link from 'next/link';
 import { getProducts } from '@/lib/api-client';
 import { ProductCard } from '@/components/ProductCard';
 
+export const dynamic = 'force-dynamic';
+
 export default async function CatalogPage() {
   const products = await getProducts();
 
